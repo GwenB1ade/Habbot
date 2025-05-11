@@ -5,7 +5,7 @@ class Settings(BaseSettings):
 
     BOT_KEY: str
     GROQ_API_KEY: str
-    model_config = SettingsConfigDict(env_file="../.env")
+    model_config = SettingsConfigDict(env_file=".env")
 
 
 settings = Settings()

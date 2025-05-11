@@ -7,7 +7,7 @@ class GroqClient:
     client = Groq(api_key=settings.GROQ_API_KEY)
 
     @classmethod
-    def generate(cls, text: str):
+    def generate(cls, text: str) -> str:
         response = cls.client.chat.completions.create(
             messages=[
                 {

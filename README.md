@@ -4,7 +4,7 @@
 
 Вводим данные команды:
 ```
-git clone ... .
+git clone https://github.com/GwenB1ade/Habbot
 python3 -m venv .venv
 . .venv/bin/activate
 pip3 install -r req.txt

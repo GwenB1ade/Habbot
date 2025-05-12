@@ -21,6 +21,5 @@ GROQ_API_KEY=токен_groq
 После вводим такие команды:
 
 ```
-cd app
 python3 main.py
 ```

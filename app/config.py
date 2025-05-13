@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_core import ValidationError
 
 
 class Settings(BaseSettings):
@@ -8,4 +9,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
 
-settings = Settings()
+try:
+    settings = Settings()
+
+except:
+    raise Exception('Ошибка: файл .env не найден или в нём отсутствует нужная переменная. Проверьте наличие файла и правильность названий переменных, затем перезапустите приложение.')

@@ -47,7 +47,7 @@ cd Habbot
 
 Для Linux/macOS (.sh)
 ```sh
-chmod +x setup.sh  # Даём права на выполнение
+chmod +x startup.sh  # Даём права на выполнение
 ./startup.sh         # Запускаем скрипт
 ```
 Для Windows (.bat)

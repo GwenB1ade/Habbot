@@ -4,10 +4,11 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.filters.command import Command
 
 from aiogram.types import Message
-from config import settings
+from app.config import settings
+from app import messages_texts
 
-from chatgpt import ChatGPTClient
-from client_groq import GroqClient
+
+from app.client_groq import GroqClient
 
 
 bot = Bot(settings.BOT_KEY)
@@ -16,30 +17,27 @@ dp = Dispatcher()
 
 @dp.message(Command("start"))
 async def start_command(message: Message):
-    await message.answer(
-        "Привет, я твой ассистент, задай любой вопрос и я на него отвечу"
+    await message.answer_sticker(
+        "CAACAgIAAxkBAAEOeWNoI6E63o4dieVA-F6VjPiic5X3wQACIAkAAhhC7gjhiiCooToK2TYE"
     )
+    await message.answer(messages_texts.StartMessage.message())
 
 
-# @dp.message(F.text)
-# async def request(message: Message):
-#     last_bot_message = await message.answer('Подождите пару секунд на генерирование ответа')
-#     data = await ChatGPTClient.generate(message.text)
-#     await last_bot_message.edit_text(data)
+@dp.message(Command("call"))
+async def call_schedule(message: Message):
+    await message.answer(messages_texts.CallScheduleMessage.message())
 
 
 @dp.message(F.text)
 async def request(message: Message):
-    last_bot_message = await message.answer(
-        "Подождите пару секунд на генерирование ответа"
-    )
+    last_bot_message = await message.answer(messages_texts.LoadMessage.message())
     data = GroqClient.generate(message.text)
-    await last_bot_message.edit_text(data)
+    await last_bot_message.delete()
+    await asyncio.sleep(0.2)
+    await message.answer(data)
 
 
 async def main():
-    # dp.include_router()
-    # await ChatGPTClient.generate('Test')
     await dp.start_polling(bot)
 
 

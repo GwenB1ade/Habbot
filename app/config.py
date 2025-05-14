@@ -12,5 +12,5 @@ class Settings(BaseSettings):
 try:
     settings = Settings()
 
-except:
+except ValidationError:
     raise Exception('Ошибка: файл .env не найден или в нём отсутствует нужная переменная. Проверьте наличие файла и правильность названий переменных, затем перезапустите приложение.')
